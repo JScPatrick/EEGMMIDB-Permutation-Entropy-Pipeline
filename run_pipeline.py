@@ -1,34 +1,26 @@
 """
-EEGMMIDB Permutation-Entropy (PE) Decoding Pipeline
-Cross-like + spatio-temporal ordinal patterns benchmarked against temporal + HV spatial PE
+Permutation-Entropy (PE) Decoding Pipeline for EEGMMIDB Public Data
+Cross-like spatial and spatiotemporal ordinal patterns benchmarked against temporal and horizontal/vertical spatial PE
 
-Key design choices implemented:
-- Group-aware CV (trial-pair grouping) via StratifiedGroupKFold when available.
-- Band-invariant trial rejection + band-invariant trial capping:
-  Rejection/capping are computed once (on a fixed rejection band) and then applied to all analysis bands.
+Important design choices used:
+- Group-aware CV (trial-pair grouping) through StratifiedGroupKFold when available.
+- Band-invariant trial rejection and band-invariant trial capping:
+  Rejection and capping are computed once (on a fixed rejection band) and then applied to all analysis bands.
   This prevents different bands from silently using different trial subsets.
 - MI vs ME fairness supports:
   (a) contrast-specific PTP thresholds, (b) optional ROI-only PTP check, (c) explicit matched MI/ME subject summaries.
-- Two analysis scopes as a factor:
+- Two analysis scopes:
   "whole" vs "sensorimotor" (feature extraction scope, not just rejection).
-- Sensorimotor scope supports novel families via motor-centered cross construction.
-- Strengthening additions:
+- Sensorimotor scope supports through novel families via motor-centered cross construction.
+- Additions for Strengthening:
   1) Ablation to test whether “novel features add complementary variance”.
   2) Within-pair label permutation test (swap baseline/task within each trial group) as a leakage/chance sanity check.
   3) Motor-relevant band analysis (mu, beta, mu+beta, broad).
-  4) ROI vs whole-scalp as an explicit analysis factor.
+  4) Sensorimotor ROI vs whole-scalp as an analysis factor.
   5) Clear novelty test framing (“do cross/spatiotemporal outperform temporal/HV under rigorous CV?”).
-  6) Optional robustness grid runner (multiple config variants in one run).
+  6) Robustness grid runner as an option (multiple config variants in one run).
   7) Minimal interpretability output hooks (delta-PE summaries by scope/family).
   8) Minimal “ready-to-run repo” items: single script, config-first, deterministic RNG, comprehensive outputs.
-
-Additional outputs added in this version:
-- cross_count_distribution_summary.csv
-  Group-level distribution summaries for cross availability per scope.
-- capacity_matched_controls.csv
-  Capacity-matched controls to address “more predictors” confound:
-  (A) base + Gaussian-noise columns (same added dimensionality as novel features)
-  (B) base + shuffled-novel columns (trial-pair–preserving shuffle across trials)
 
 Outputs (per run folder):
 - run_config.txt / run_config.json
