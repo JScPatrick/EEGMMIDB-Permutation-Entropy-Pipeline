@@ -1,0 +1,7 @@
+{
+  "DATA_ROOT": "./data/EEGMMIDB",
+  "OUT_FOLDER": "./outputs/pe_cross_spatiotemporal_results",
+  "DEBUG": false,
+  "CV_FOLDS": 5,
+  "RNG_SEED": 0
+}

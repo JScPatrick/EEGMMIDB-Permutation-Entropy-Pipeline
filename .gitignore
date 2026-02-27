@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# PyCharm / IntelliJ
+.idea/
+
+# OS
+.DS_Store
+
+# Data + outputs (don’t upload)
+data/
+outputs/
+entropy_results/
+
+# User-specific config (don’t commit)
+config.json
+
+# Old attempts / archives (don’t publish)
+archive/
+previous_versions/
+scratch/
+Imagery/
+Imagine-Sit/
